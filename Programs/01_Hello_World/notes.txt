@@ -1,0 +1,16 @@
+with Ada.Text_IO;   -----> is needed to use Ada.Text_IO
+
+
+procedure ----. in this case might be like the main function in c
+
+Ada.Text_IO.Put_Line("[text]") ---> prints on consol the string between the double quote and adds a new-line 
+
+Ada.Text_IO.Put("[text]") -----> prints on the console the string between the double quote but dones not make a new line.
+
+Ada.Text_IO.New_Line ------> Just ads a new line
+
+Hence Ada.Text_IO.Put_Line ([text])  === Ada.IO.Put([text]) + Ada.Text_IO.New_Line
+
+
+FOR COMPILING
+gnatmake -g [name_of_code].adb
