@@ -127,13 +127,17 @@ begin
     -- Read in an integer value
     Get(N);
 
+    -- Print an integer into the screen
+    Put(N);
+
     if N > 0 then
-        -- Put an integer
-        Put("The number: ");
-        Put(N);
+        -- Print a is a positive number
         Put_Line(" is a positive number");
+    else
+        Put_Line(" is a non-positive number");
     end if;
 end check_positive;
+
 \end{lstlisting}
 
 \section{Main parts}
@@ -148,7 +152,7 @@ The variables and subsfunctions that are going to be used and implemented in the
 \subsection{if - end if  directives}
 The main part of this document is the \verb|if - then - end if| directives. In line 13 the \verb|if| statement is used, compared with other programming languages the condition is not sorrounded by parenthesis but it could be if there are associative conditions. After the condition the reserved word \verb|then| is used and after that the different statements of the body related to the conditional are added.\\
 
-To finish the \verb|if| directive the command \verb|end if| has to be put with a semicolon \verb|;|. 
+As in other programming languages when two paths are needed when a condition is tested, the case in which the condition is filled and the second scenario in which the condition is not filled the \verb|else| directive is needed, and beteween the \verb|else| and the \verb|end if;| the statements to be executed must be placed. 
 
 
 
