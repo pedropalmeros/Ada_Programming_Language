@@ -1,0 +1,159 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+%\usepackage[spanish]{babel} % English language/hyphenation
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{graphicx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Ada,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{ADA Programming Language Training} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Program 01 \\ Hello World \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Pedro Fernando Flores Palmeros} % Your name
+
+\date{} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title         
+ 
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+The main pupose of this document is just to explain main components of the code. It is not go deeper, if further information is required books can be used.
+
+\section{Code}
+
+
+
+\begin{lstlisting}
+-- hello_world.adb
+
+with Ada.Text_IO;
+
+procedure hello_world is
+
+begin
+    Ada.Text_IO.Put_Line("Hello World!");
+    Ada.Text_IO.Put_Line("It's a wonderful day!");
+    Ada.Text_IO.New_Line;
+end hello_world;
+\end{lstlisting}
+
+\section{Important details and commands}
+
+\subsection{Comments}
+In ADA the comments marked with \verb+--+ and there are only comments of  a single line. 
+
+\subsection{procedure hello world}
+A procedure can be seen like a function or special kind of it, in this case it is the main function and it is named \verb+hello_wolrd+.\\
+
+If some variables might be or \textit{subfunctions} are needed they have to be plaecd in the space between the declarartion of the function (which in this case is given by \verb+procedure hello_world is+ and the \verb+begin+ command that in this particular case is at line 7.\\
+
+The end of the procedure is in line 11 observe that it has to begin with the word \verb+end+ and then the name of the procedure to be finished, hence in this parcular case is \verb+end hello_world+. 
+
+\subsection{Printing in the console}
+
+\verb|Ada.Text_IO.Put_Line("|\textit{text}\verb|")| with this command the text in italic is printed in the command line and after printing the contenet between the double quotes a new line will be commanded, hence the cursor is set one line down and in the left of the command line.\\
+
+\verb|Ada.Text_IO.Put("|\textit{text}\verb|")| with this command the text in italic is printed in the command line but the main difference between this command and the one before is that this one \textbf{DOES NOT ADD A NEW LINE}.\\
+
+\verb|Ada.Text_IO.New_Line| with this command no text is printed on the screen, only new line is commanded.
+
+\section{Hello World option 2}
+ 
+\begin{lstlisting}
+-- hello_world.adb
+
+with Ada.Text_IO; use Ada.Text_IO;
+
+procedure hello_world is
+
+begin
+    Put_Line("Hello World!");
+    Put_Line("It's a wonderful day!");
+    New_Line;
+end hello_world;
+\end{lstlisting}
+
+The main difference between this program and the first one is the that in the line 3 the part \verb|use Ada.Text_IO;| helps in the subsequent lines and observe that now to invoque the fucntions \verb|Put_Line|, \verb|Put| and \verb|New_Line| it is not needed the first part of the command \verb|Ada.Text_IO| since it has been declared previously.\\
+
+\end{document}

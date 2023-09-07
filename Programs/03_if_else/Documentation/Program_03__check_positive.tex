@@ -1,0 +1,156 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+%\usepackage[spanish]{babel} % English language/hyphenation
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{graphicx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Ada,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{ADA Programming Language Training} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Program 03\\ Check Positive \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Pedro Fernando Flores Palmeros} % Your name
+
+\date{} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title         
+ 
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+The main syntaxis of the \verb|if| control structure is the next
+
+\begin{lstlisting}
+if <condition> then
+	statement 01;
+	...
+	statement n;
+else
+	statement 01;
+	...
+	statement m;
+end if;
+\end{lstlisting}
+in this case \verb|<condition>| is the condition to be tested it does not require the \verb|<>| symbols.
+
+\section{Code}
+\begin{lstlisting}
+with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+
+procedure check_positive is 
+    N : Integer;
+begin
+    -- Put a String
+    Put ("Enter an integer value: ");
+
+    -- Read in an integer value
+    Get(N);
+
+    if N > 0 then
+        -- Put an integer
+        Put("The number: ");
+        Put(N);
+        Put_Line(" is a positive number");
+    end if;
+end check_positive;
+\end{lstlisting}
+
+\section{Main parts}
+Observe that in this case in line 1 and 2 the packages that are going to be used are declared, and that is why in the lines 8, 15, 16, 17 the commands are without \verb|Ada.Text_IO|. For further information in the first program is a detailed explanation of it. 
+
+\subsection{Get(N)}
+This function is part of the package \verb|Ada.Text_IO|, and it is useful for reading Integers from the keyboard, observe that a variable of Integer type has to be sent in the function argument. 
+
+\subsection{Variable declaration}
+The variables and subsfunctions that are going to be used and implemented in the main procedure has to be defined in the lines between the procedure declaration and the begin of the implementation of the procedure. In this particular case between line 4 and 5.
+
+\subsection{if - end if  directives}
+The main part of this document is the \verb|if - then - end if| directives. In line 13 the \verb|if| statement is used, compared with other programming languages the condition is not sorrounded by parenthesis but it could be if there are associative conditions. After the condition the reserved word \verb|then| is used and after that the different statements of the body related to the conditional are added.\\
+
+To finish the \verb|if| directive the command \verb|end if| has to be put with a semicolon \verb|;|. 
+
+
+
+
+\end{document}
