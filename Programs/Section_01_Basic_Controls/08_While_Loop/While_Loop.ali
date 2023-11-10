@@ -1,0 +1,50 @@
+V "GNAT Lib v9"
+M P W=b
+A -g
+P ZX
+
+RN
+RV NO_IO
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV SPARK_05
+
+U greet_5c%b		While_Loop.adb		93ad6abf NE OO SU
+W ada%s			ada.ads			ada.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+Z system.concat_2%s	s-conca2.adb		s-conca2.ali
+Z system.img_int%s	s-imgint.adb		s-imgint.ali
+
+D ada.ads		20210601075304 76789da1 ada%s
+D a-except.ads		20210601075304 291912d5 ada.exceptions%s
+D a-ioexce.ads		20210601075304 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20210601075304 119b8fb3 ada.streams%s
+D a-tags.ads		20210601075304 491b781d ada.tags%s
+D a-textio.ads		20210601075304 881db35a ada.text_io%s
+D a-unccon.ads		20210601075304 0e9b276f ada.unchecked_conversion%s
+D While_Loop.adb	20231110180049 1bb0d9e5 greet_5c%b
+D interfac.ads		20210601075304 5ab55268 interfaces%s
+D i-cstrea.ads		20210601075304 e53d8b8e interfaces.c_streams%s
+D system.ads		20210601075304 4635ec04 system%s
+D s-conca2.ads		20210601075304 02a0d7d0 system.concat_2%s
+D s-crtl.ads		20210601075304 0ebbdb71 system.crtl%s
+D s-exctab.ads		20210601075304 54135002 system.exception_table%s
+D s-ficobl.ads		20210601075304 078245e4 system.file_control_block%s
+D s-imgint.ads		20210601075304 02dbe0c2 system.img_int%s
+D s-parame.ads		20210601075304 48ec542b system.parameters%s
+D s-secsta.ads		20210601075304 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20210601075304 a7318a92 system.soft_links%s
+D s-stache.ads		20210601075304 a37c21ec system.stack_checking%s
+D s-stalib.ads		20210601075304 09bd3940 system.standard_library%s
+D s-stoele.ads		20210601075304 2dc34a04 system.storage_elements%s
+D s-traent.ads		20210601075304 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20210601075304 34867c83 system.unsigned_types%s
+D s-wchcon.ads		20210601075304 1b7d22d2 system.wch_con%s
+X 1 ada.ads
+16K9*Ada 20e8 8|1r6 1r23
+X 6 a-textio.ads
+49K13*Text_IO 471e16 8|1w10 1r27
+263U14*Put_Line 8|11s9
+X 8 While_Loop.adb
+3U11*Greet_5c 3b11 14l5 14t13
+4i5 I{integer} 10r11 11r51 12m9 12r13
+

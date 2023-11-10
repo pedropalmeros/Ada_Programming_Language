@@ -81,7 +81,7 @@
 \normalfont \normalsize 
 \textsc{ADA Programming Language Training} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge Program 04\\ Check Direction \\ % The assignment title
+\huge Program 05\\ For Loops First step\\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -98,80 +98,37 @@
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-The main syntaxis of the \verb|if| control structure is the next
+The main syntaxis of the \verb|For| control structure is the next
 
 \begin{lstlisting}
-if <condition> then
-	statement 01;
-	...
-	statement n;
-elsif <condition 1> then
-	statement 01;
-	...
-	statement m;
-elsif <condition q> then
-	statement 01;
-	...
-	statement p;
-else
-	statement 01;
-	...
-	statement k;
-end if;
+for item in InterativeStructure
+	statement 1
+	.
+	.
+	.
+	statement n
+end loop
+	
 \end{lstlisting}
-in this case \verb|<condition>| is the condition to be tested it does not require the \verb|<>| symbols.
+in this case \verb|IterativeStrucutre| is an strucutre with many items, such as an array. Hence for each item in the array the \verb|statement 1| until \verb|statement n| are executed.
 
 \section{Code}
 \begin{lstlisting}
 with Ada.Text_IO; use Ada.Text_IO;
-with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 
-procedure Check_Direction is 
-    N : Integer;
+procedure For_Loop is 
 begin
-    Put("enter an integer value");
-    Get(N);
-    Put(N);
+    for I in 1..5 loop
+        -- Put_Line is a procedure call
+        Put_Line("Hello, World" & Integer'Image(I));
+    
+        --       Procedure Parameter
+    end loop;
 
-    if N=0 or N=360 then
-        Put_Line("  is due north");
-    elsif N in 1..89 then
-        Put_Line("  is in the northeast quadrant");
-    elsif N in 90 then
-        Put_Line(" is due east");
-    elsif N in 91 ..179 then
-        Put_Line(" is in the southeast quadrant" );
-    elsif N in 180 then
-        Put_Line(" is due south" );
-    elsif N in 181..269 then
-        Put_Line(" is in the southwest quadrant" );
-    elsif N = 270 then
-        Put_Line(" is due west");
-    elsif N in 271 .. 359 then
-        Put_Line(" is in the northwest quadrant" );
-    else
-        Put_Line(" is not in the range 0 ... 360" );
-    end if;
-end Check_Direction;
-
-
+end For_Loop;
 \end{lstlisting}
 
 \section{Main parts}
-Observe that in this case in line 1 and 2 the packages that are going to be used are declared, and that is why in the lines 8, 15, 16, 17 the commands are without \verb|Ada.Text_IO|. For further information in the first program is a detailed explanation of it. 
 
-\subsection{Get(N)}
-This function is part of the package \verb|Ada.Text_IO|, and it is useful for reading Integers from the keyboard, observe that a variable of Integer type has to be sent in the function argument. 
-
-\subsection{Variable declaration}
-The variables and subsfunctions that are going to be used and implemented in the main procedure has to be defined in the lines between the procedure declaration and the begin of the implementation of the procedure. In this particular case between line 4 and 5.
-
-\subsection{if - elsif - else  directives}
-Sometimes due the nature of the algorithm or problem to be solved it is required to use multiple conditions to evaluate a certain event, in this case the directive to be used is the \verb|elsif|. \\
-
-With this directive many conditions can be nested. In which if the first condition is not filled the second condition is tested and if the second is not filled, then it goes through the rest fo the conditions, if no condition has been accomplished then the conditions attached to the else are executed. 
-
-
-
-
+In this case in line  5 the for loop is used and can be "read" as \textit{for each number from 1 to 5 execute the instructions in the foor loop}. Observe that in this case \verb|1..5| creates an iterave object like an array that stores $\begin{bmatrix} 1 & 2 & 3 & 4 & 5 \end{bmatrix}$. Once the array is created the code lopps through each number within the array.
 \end{document}
