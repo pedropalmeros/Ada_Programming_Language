@@ -1,34 +1,14 @@
-with Ada.Text_IO; use Ada.Text_IO;
-with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+With Ada.Text_IO; use Ada.Text_IO;
 
-procedure Check_Direction is
-    N : Integer ;
+procedure Main is 
+    X: integer; 
 begin
-    loop
-        Put("Enter an integer value: ");
-        Get(N);
-        Put(N);
+    X := 0;
+    Put_Line("The initial value of X is " & Integer'Image(X));
 
-        case N is
-            when 0 | 360 => 
-                Put_Line(" is due north");
-            when 1 .. 89 =>
-                Put_Line(" is due northeast quadrant");
-            when 90 =>
-                Put_Line(" is due east");
-            when 91 .. 179 =>
-                Put_Line(" is in the southeast quadrant");
-            when 180 =>
-                Put_Line(" is due south");
-            when 181 .. 269 =>
-                Put_Line(" is in the  southwest quadrant");
-            When 270 =>
-                Put_Line(" is due west");
-            when 271 .. 359 =>
-                Put_Line(" is in the northwest quadrant");
-            when others=>
-                Put_Line(" Au revoid");
-                exit;
-        end case;
-    end loop;
-end Check_Direction;
+    Put_Line("Performing operation on X ... ");
+
+    X := X + 1;
+
+    Put_Line("The value of X now is " & Integer'Image(X));
+end Main;

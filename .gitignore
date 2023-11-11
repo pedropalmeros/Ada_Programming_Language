@@ -1,0 +1,16 @@
+#Object file
+*.o
+
+#Ada Library Information
+*.ali
+
+*.
+
+~b*.*
+
+
+*.gz
+
+*.aux
+
+*.log

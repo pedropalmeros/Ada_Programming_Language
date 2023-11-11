@@ -81,7 +81,7 @@
 \normalfont \normalsize 
 \textsc{ADA Programming Language Training} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge Program 07\\ Bare Loops\\ % The assignment title
+\huge Program 11\\ Declaring a sub program inside the declaration region\\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -98,39 +98,22 @@
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-The main syntaxis of the \verb|loop| control structure is the next
+Ada draws a clear syntactic  separation between declarations, which introduce names for entities that will be used in the program, and statements, which perform the processing. the areas in the program where declarations may appear are known as \textit{declarative regions}.\\
 
-\begin{lstlisting}
-loop 
-	statement 1
-	.
-	.
-	.
-	statement n
-end loop;
-	
-\end{lstlisting}
-in this case the loop begins at line 1 and finishes at line 7. Observe that in this loop there is no instruction to exit from the loop
 
-\section{Code}
 \begin{lstlisting}
 with Ada.Text_IO; use Ada.Text_IO;
 
-procedure Bare_Loop is 
-    -- Varialbe declaration: 
-    I : Integer := 1;
+procedure Main is 
+	procedure nested is
+	begin
+		Put_Line("Hello World");
+	end nested;
 begin
-    loop 
-        Put_Line("Hello World!" & Integer'Image(I));
-
-        exit when I = 5; 
-
-        I:= I + 1;
-    end loop;
-end Bare_Loop;
+	Nested; --| CALL TO NESTED
+end Main;
+	
 \end{lstlisting}
 
-\section{Main parts}
-
-In this example, the loop begins in line 7 and ends in line 13. Observe that in line 10 is a instruction with the \verb|exit when|, when te condition is filled then program exists the loop and continue with the normal execution.
+In the program shown in the program shown in the previous section, the declarative region is between line 3 and line 8, observe that in this region a new procedure is declared like a function inside the declaration region, and in line 9 this procedure is being invoked and the lines within it are executed.
 \end{document}

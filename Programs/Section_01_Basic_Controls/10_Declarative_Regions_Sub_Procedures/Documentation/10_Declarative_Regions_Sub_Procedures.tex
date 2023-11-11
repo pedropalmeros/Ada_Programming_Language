@@ -98,39 +98,28 @@
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-The main syntaxis of the \verb|loop| control structure is the next
+Ada draws a clear syntactic separation between declarations, which introduces names for entitites that will be used in the program, and statements, which perform the processing. The areas in the program where declarartions my appear ar knonw as \textbf{declarative regions}.\\
+
+In any suprogram, the section between the \verb|is| and the \verb|begin| is \textbf{delcarative region}. You can have varibles, constants, types, inner subprograms, and other entities here. 
 
 \begin{lstlisting}
-loop 
-	statement 1
-	.
-	.
-	.
-	statement n
-end loop;
-	
-\end{lstlisting}
-in this case the loop begins at line 1 and finishes at line 7. Observe that in this loop there is no instruction to exit from the loop
+With Ada.Text_IO; use Ada.Text_IO;
 
-\section{Code}
-\begin{lstlisting}
-with Ada.Text_IO; use Ada.Text_IO;
-
-procedure Bare_Loop is 
-    -- Varialbe declaration: 
-    I : Integer := 1;
+procedure Main is 
+    X: integer; 
 begin
-    loop 
-        Put_Line("Hello World!" & Integer'Image(I));
+    X := 0;
+    Put_Line("The initial value of X is " & Integer'Image(X));
 
-        exit when I = 5; 
+    Put_Line("Performing operation on X ... ");
 
-        I:= I + 1;
-    end loop;
-end Bare_Loop;
+    X := X + 1;
+
+    Put_Line("The value of X now is " & Integer'Image(X));
+end Main;
 \end{lstlisting}
 
-\section{Main parts}
+In this particular case, the declaration region is betweeen line 3 and 5 in which there is a declaration of a single Variable of integer 
 
-In this example, the loop begins in line 7 and ends in line 13. Observe that in line 10 is a instruction with the \verb|exit when|, when te condition is filled then program exists the loop and continue with the normal execution.
+
 \end{document}
