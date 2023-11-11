@@ -29,6 +29,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{listings}
+\renewcommand{\lstlistingname}{Code}
 \usepackage{color}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -81,7 +82,7 @@
 \normalfont \normalsize 
 \textsc{ADA Programming Language Training} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge Program 07\\ Bare Loops\\ % The assignment title
+\huge Section 02 \\ Packages 01\\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -98,39 +99,60 @@
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-The main syntaxis of the \verb|loop| control structure is the next
+In the previous section simple standalone subprograms were presented. It is easy to see that the programming style from the first section is not useful for scaling up for real-world applications. A better way to structure the code into modular and distinct units is needed.\\
 
-\begin{lstlisting}
-loop 
-	statement 1
-	.
-	.
-	.
-	statement n
-end loop;
-	
+Ada encourages the separation of programs into multiple packages and sub-packages, providing many tools to a  programmer on a quest for a perfectly organized code-base. 
+
+Here is an example of a package in ADA
+
+\begin{lstlisting}[caption = {week.ads}]
+package Week is
+	Mon : constant String := "Monday";
+	Tue : constant String := "Tuesday";
+	Wed : constant String := "Wednesday";
+	Thu : constant String := "Thursday";
+	Fri : constant String := "Friday";
+	Sat : constant String := "Saturday";
+	Sun : constant String := "Sunday";
+end Week;
 \end{lstlisting}
-in this case the loop begins at line 1 and finishes at line 7. Observe that in this loop there is no instruction to exit from the loop
 
-\section{Code}
-\begin{lstlisting}
+The \verb|Code 1| is package, the first aspect to have on mind is that the file extension has changed to \verb|.ads|  which is a \verb|spect| ADA file. This do not do anything by itself, it has to be invoked from a \verb|main| or other program. 
+
+\begin{lstlisting}[caption = {main.adb}]
 with Ada.Text_IO; use Ada.Text_IO;
+with Week;
+-- References the Week package,
+-- and ads a dependency from Main to Week
 
-procedure Bare_Loop is 
-    -- Varialbe declaration: 
-    I : Integer := 1;
-begin
-    loop 
-        Put_Line("Hello World!" & Integer'Image(I));
-
-        exit when I = 5; 
-
-        I:= I + 1;
-    end loop;
-end Bare_Loop;
+procedure Main is 
+begin  
+	Put_Line("First day of the week is " & Week.Mon);
+end Main;
 \end{lstlisting}
 
-\section{Main parts}
+The \verb|Code 2| snippet is the main code, in this code at line 8 is being invoked the week package and specifically the Monday day. \\
 
-In this example, the loop begins in line 7 and ends in line 13. Observe that in line 10 is a instruction with the \verb|exit when|, when te condition is filled then program exists the loop and continue with the normal execution.
+Packages let make your code modular, separating you programs into semantically significant unit. Additionally the separation of a package's specification from its body can reduce compilation time.\\
+
+While the \verb|with| clause indicates a dependency, you can see in the example that you still need to prefix the referencing of entities from the Week package by the name of the package. If we had included a \verb|use| Week clause, then such a prefix would not have been necessary.\\
+
+Accessing entities from a package uses the dot notation, A.B which is the same notation as the one used to access record files. \\
+
+A \verb|with| clause can \textit{only} appear in the prelude of a compilation unit (before the reserved word such as \verb|procedure|, that makrs the beginning of the unit). It is not allowed anywhere else. This rule is only needed for methodological reasons: the person reading your code should be able to see immediately which units the code depends on. 
+
+\begin{lstlisting}[caption = {main.adb}]
+with Ada.Text_IO; use Ada.Text_IO;
+with Week; use Week;
+-- References the Week package,
+-- and ads a dependency from Main to Week
+
+procedure Main is 
+begin  
+	Put_Line("First day of the week is " & Mon);
+end Main;
+\end{lstlisting}
+
+
+
 \end{document}

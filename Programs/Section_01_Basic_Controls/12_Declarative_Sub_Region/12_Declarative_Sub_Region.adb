@@ -1,34 +1,18 @@
 with Ada.Text_IO; use Ada.Text_IO;
-with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 
-procedure Check_Direction is
-    N : Integer ;
+procedure Greet is
 begin
-    loop
-        Put("Enter an integer value: ");
-        Get(N);
-        Put(N);
+    loop 
+        Put_Line("Please enter your name: ");
+        declare
+            Name : String := Get_Line; -- Call to the Get_Line function
+        begin
+            exit when Name = "";
+            Put_Line("Hi " & Name & "!");
+        end;
 
-        case N is
-            when 0 | 360 => 
-                Put_Line(" is due north");
-            when 1 .. 89 =>
-                Put_Line(" is due northeast quadrant");
-            when 90 =>
-                Put_Line(" is due east");
-            when 91 .. 179 =>
-                Put_Line(" is in the southeast quadrant");
-            when 180 =>
-                Put_Line(" is due south");
-            when 181 .. 269 =>
-                Put_Line(" is in the  southwest quadrant");
-            When 270 =>
-                Put_Line(" is due west");
-            when 271 .. 359 =>
-                Put_Line(" is in the northwest quadrant");
-            when others=>
-                Put_Line(" Au revoid");
-                exit;
-        end case;
+        --Name is undefined here
     end loop;
-end Check_Direction;
+
+    Put_Line("Bye ! ");
+end Greet;

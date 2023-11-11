@@ -104,16 +104,26 @@ Ada draws a clear syntactic  separation between declarations, which introduce na
 \begin{lstlisting}
 with Ada.Text_IO; use Ada.Text_IO;
 
-procedure Main is 
-	procedure nested is
-	begin
-		Put_Line("Hello World");
-	end nested;
+procedure Greet is
 begin
-	Nested; --| CALL TO NESTED
-end Main;
+	loop 
+		Put_Line("Please enter your name: ");
+		declare
+			Name : String := Get_Line; -- Call to the Get_Line function
+		begin
+			exit when Name = "";
+			Put_Line("Hi " & Name & "!");
+		end;
+
+	--Name is undefined here
+	end loop;
+
+	Put_Line("Bye ! ");
+end Greet;
 	
 \end{lstlisting}
 
-In the program shown in the program shown in the previous section, the declarative region is between line 3 and line 8, observe that in this region a new procedure is declared like a function inside the declaration region, and in line 9 this procedure is being invoked and the lines within it are executed.
+In the program shown in the previous section, the main procedure is named \verb|Greet| and inside of its principal declaration region there is nothing. In line 5 begins a loop that ends in line 15.\\
+
+In line 7 begins a declaration zone and ends in the line 12, observe that this declaration zone is inside the program  and also the variable declared within this region is availble only inside the region. Also, observe that within this declaration can be executed lines of code that deals and works with the very local variables (to say so) as it is shown in line 10 and 11¨
 \end{document}
