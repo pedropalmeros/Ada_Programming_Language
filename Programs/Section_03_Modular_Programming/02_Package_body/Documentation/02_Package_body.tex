@@ -99,60 +99,84 @@
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-In the previous section simple standalone subprograms were presented. It is easy to see that the programming style from the first section is not useful for scaling up for real-world applications. A better way to structure the code into modular and distinct units is needed.\\
+In the prevvious example the Week package only had declarations and no body. In a package specification, you cannot declare bodies. Those have to be in the package body.\\
 
-Ada encourages the separation of programs into multiple packages and sub-packages, providing many tools to a  programmer on a quest for a perfectly organized code-base. 
+The next code is \verb|operations.ads| this code is just the manifold or the skeleton of the package, only the function signature is declared but not implemented. In this example there are two main functions the first one is \verb|Increment_By| that has two parameter, the fist one is \verb|I| and it is needed, and the second parameter is \verb|Incr| this parameter is optional, if it is not provided by the user, then it will use its default value as 0. The second function is \verb|Get_Increment_Value| this function does not have parameters and returns an Integer.\\
 
-Here is an example of a package in ADA
+\begin{lstlisting}[caption = {operations.ads}, label = {operations_ads}]
+package Operations is 
 
-\begin{lstlisting}[caption = {week.ads}]
-package Week is
-	Mon : constant String := "Monday";
-	Tue : constant String := "Tuesday";
-	Wed : constant String := "Wednesday";
-	Thu : constant String := "Thursday";
-	Fri : constant String := "Friday";
-	Sat : constant String := "Saturday";
-	Sun : constant String := "Sunday";
-end Week;
+	-- Declaration 
+	function Increment_By
+		(I    : Integer;
+		 Incr : Integer := 0) return Integer;
+
+	function Get_Increment_Value return Integer;
+
+end Operations;
 \end{lstlisting}
 
-The \verb|Code 1| is package, the first aspect to have on mind is that the file extension has changed to \verb|.ads|  which is a \verb|spect| ADA file. This do not do anything by itself, it has to be invoked from a \verb|main| or other program. 
+The next code is \verb|operations.adb| in this code is the implementation of the functions declared in code~\ref{operations_ads}. Coincidentally, introducing a body allows us to put the \verb|Last_Increment| variable in the body and make then inaccessible to the user of the \verb|Operations| package, providing the fist form of encapuslation. This works because entities declared in the body are \textit{only} visible in the body. \\
 
-\begin{lstlisting}[caption = {main.adb}]
+\begin{lstlisting}[caption = {operations.adb}]
+package body Operations is
+
+	Last_Increment : Integer := 1;
+
+	function Increment_By
+		( I    : Integer;
+		  Incr : Integer := 0) return Integer is
+	begin
+		if Incr /= 0 then
+			Last_Increment := Incr;
+		end if; 
+
+		return I + Last_Increment;
+	end Increment_By;
+
+	function Get_Increment_Value return Integer is
+	begin 
+		return Last_Increment;
+	end Get_Increment_Value;
+	
+end Operations;
+\end{lstlisting}
+
+In the \verb|main| the \verb|Operations| package is used and a procedure is declarad and implemented only to display de values. Note that in line 22 the procedure \verb|Increment_By| is used with two arguments and in line 17 is invoked only with one value. 
+
+\begin{lstlisting}[caption = {operations.adb}]
 with Ada.Text_IO; use Ada.Text_IO;
-with Week;
--- References the Week package,
--- and ads a dependency from Main to Week
+with Operations;
 
-procedure Main is 
-begin  
-	Put_Line("First day of the week is " & Week.Mon);
+procedure Main is
+	use Operations;
+	I : Integer := 0;
+	R : Integer;
+
+	procedure Display_Udate_Values is
+		Incr : constant Integer := Get_Increment_Value;
+	begin  
+		Put_Line(Integer'Image(I) & " incremented by "
+			 & Integer'Image(Incr) & " is " & Integer'Image(R));
+		I := R;
+	end Display_Udate_Values;
+begin 
+	R := Increment_By(I);
+	Display_Udate_Values;
+	R := Increment_By(I);
+	Display_Udate_Values;
+
+	R := Increment_By(I,5);
+	Display_Udate_Values;
+	R := Increment_By(I);
+	Display_Udate_Values;
+
+	R := Increment_By(I, 10);
+	Display_Udate_Values;
+	R := Increment_By(I);
+	Display_Udate_Values;
 end Main;
 \end{lstlisting}
-
-The \verb|Code 2| snippet is the main code, in this code at line 8 is being invoked the week package and specifically the Monday day. \\
-
-Packages let make your code modular, separating you programs into semantically significant unit. Additionally the separation of a package's specification from its body can reduce compilation time.\\
-
-While the \verb|with| clause indicates a dependency, you can see in the example that you still need to prefix the referencing of entities from the Week package by the name of the package. If we had included a \verb|use| Week clause, then such a prefix would not have been necessary.\\
-
-Accessing entities from a package uses the dot notation, A.B which is the same notation as the one used to access record files. \\
-
-A \verb|with| clause can \textit{only} appear in the prelude of a compilation unit (before the reserved word such as \verb|procedure|, that makrs the beginning of the unit). It is not allowed anywhere else. This rule is only needed for methodological reasons: the person reading your code should be able to see immediately which units the code depends on. 
-
-\begin{lstlisting}[caption = {main.adb}]
-with Ada.Text_IO; use Ada.Text_IO;
-with Week; use Week;
--- References the Week package,
--- and ads a dependency from Main to Week
-
-procedure Main is 
-begin  
-	Put_Line("First day of the week is " & Mon);
-end Main;
-\end{lstlisting}
-
 
 
 \end{document}

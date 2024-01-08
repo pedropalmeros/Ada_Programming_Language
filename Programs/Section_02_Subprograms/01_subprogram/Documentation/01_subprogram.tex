@@ -1,0 +1,199 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+%\usepackage[spanish]{babel} % English language/hyphenation
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{graphicx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Code}
+\usepackage{color}
+
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Ada,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\refCode}[1]{Code.(\ref{#1})}
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+
+
+\title{	
+\normalfont \normalsize 
+\textsc{ADA Programming Language Training} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Section 02 - Subprograms \\ Subprograms 01\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Pedro Fernando Flores Palmeros} % Your name
+
+\date{} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title         
+ 
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+In the previous section we have used procedures, mostly to have a main body of code to execute.\\
+
+There are two kinds of subprograms in Ada, \textit{functions} and \textit{procedures}. The distinction between the two is that a \textbf{function returns a value} and \textbf{returns does not return anything}.\\
+
+In the next two code snippets is shown a function can be declared and implemented, the declaration is the function signature as it is shown in Code \ref{increment_ads}, and the implementation of the function body is presented at Code \ref{increment_adb}
+
+\begin{lstlisting}[caption = {increment.ads}, label = {increment_ads}]
+function Increment (I : Integer) return Integer;
+\end{lstlisting}
+
+\begin{lstlisting}[caption = {increment.adb}, label = {increment_adb}]
+function Increment (I : Integer) return Integer i
+
+begin
+	return I + 1; 
+end Increment;
+\end{lstlisting}
+
+Subprograms in Ada can have parameters. Also paratmeters can have default values. When calling the subprogram you then omit parameters if they have a default value. Unlike C/C++, a call to a subprogram without parameters does not include parentheses.
+
+\begin{lstlisting}[caption = {increment.adb}, label = {increment_by_ads}]
+function Increment_By
+	(
+	I    : Integer := 0;
+	Incr : Integer := 1) return Integer;
+	)
+\end{lstlisting}
+
+\begin{lstlisting}[caption = {increment.adb}, label = {increment_by_adb}]
+function Increment_By
+	(
+	I    : Integer := 0;
+	Incr : Integer := 1
+	) return Integer is
+begin 
+	return I + Incr;
+end Increment_By
+\end{lstlisting}
+
+The GNAT toolchain, requires the following file name scheme:
+\begin{itemize}
+	\item files with the \verb|.ads| extension contain the specification, while
+	\item files with the \verb|.adb| extension contain the implementation.
+\end{itemize}
+
+
+Therefore, in the GNAT toolchain, the specification fo the Incrementfunction must be soted in the \verb|increment.ads| file, whicle its implementation must be stored in the \verb|increment.adb| file. this rule always applies to packages.\\
+
+In the next \refCode{main_adb} the main objective is to present different ways of invoking the subprograms.
+
+\begin{lstlisting}[caption = {main.adb}, label = {main_adb}]
+
+with Ada.Text_IO; use Ada.Text_IO;
+with Increment_By;
+
+procedure Show_Increment is 
+	A, B, C : Integer;
+begin 
+	C:= Increment_By; -- Parameterless call
+	-- Value of I is 0, and Incr is 1
+
+	Put_Line ("Using defaults for Increment_By is"
+				& Integer'Image(C));
+	A := 10;
+	B := 3;
+	C := Increment_By(A, B); -- Regular parameter passing
+
+	Put_Line("Increment of " & Integer'Image(A) & " with " & Integer'Image(B) &
+			 " is " & Integer'Image(C));
+
+	A := 20;
+	B := 5;
+	C := Increment_By( I => A, Incr => B); -- Named parameter passing
+
+	Put_Line("Increment of " 
+			 & Integer'Image(A)
+			 & " with "
+			 & Integer'Image(B)
+			 & " is "
+			 & Integer'Image(C));
+end Show_Increment;
+
+\end{lstlisting}
+In the previous code there are some interesting lines that needs our attention, in line 8 the subprogram is called with no parameters, hence in this case, the values for the execution might be the default values defined in the supbrogram definition. \\
+
+In line 15 the subprogram is executed by sending two arguments and they have to be sorted depending on the subprogram definition. \\
+
+In line 22 the subprogram is executed using two arguments, observe that in this case variable assignation is being performed in the subprogram called, hence in the order of the parameters is not needed. 
+
+
+\end{document}
