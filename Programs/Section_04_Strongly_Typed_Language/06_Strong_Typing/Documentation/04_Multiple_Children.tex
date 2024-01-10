@@ -1,0 +1,162 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+%\usepackage[spanish]{babel} % English language/hyphenation
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{graphicx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Code}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Ada,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{ADA Programming Language Training} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Section 02 \\ Child packages\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Pedro Fernando Flores Palmeros} % Your name
+
+\date{} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title         
+ 
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+Packages can be used to create hierarchies. This is achieved by using child packages, which extend the functionality of their parent package. An example of this is the \verb|Ada.Text_IO| package, the parent package is called \verb|Ada| and the child package is \verb|Text_IO|. In the next codes is illustrated the creation and implementation of the \textit{child packages}.\\
+
+For this example package is \verb|week| is created into a \verb|.ads| file this is the main package and it will contain only some declarations.
+
+
+
+\begin{lstlisting}[caption = {week.ads}, label = {program_01}]
+package Week is
+
+	Mon : constant String := "Monday";
+	Tue : constant String := "Tuesday";
+	Wed : constant String := "Wednesday"; 
+	Thr : constant String := "Thursday";
+	Fri : constant String := "Friday"; 
+	Sat : constant String := "Saturday"; 
+	Sun : constant String := "Sunday"; 
+
+end Week;
+\end{lstlisting}
+
+The parent child is the \verb|Week| package and the child package is going to be \verb|Week.Child|, the child package is divided into declaration (\verb|.ads| file) and implementation (\verb|.adb| file) both of them are shown in the next snippets.
+
+\begin{lstlisting}[caption = {week-child.ads}, label = {program_02}]
+package Week.Child is
+
+	function Get_First_Of_Week return String; 
+	
+end Week.Child;
+\end{lstlisting}
+
+\begin{lstlisting}[caption = {week-child.adb}, label = {program_03}]
+package body Week.Child is 
+
+	function Get_First_Of_Week return String is
+	begin 
+
+		return Mon;
+
+	end Get_First_Of_Week;
+
+end Week.Child;
+\end{lstlisting}
+
+Observe that in the child package the data and variables from the parent package are available. For example in the line 6 of the child package the function \verb|Get_First_Of_Week| returns the \verb|Mon| variable that was declared in the parent package.\\
+
+The main procedure might has to add both of them the parent and the child package
+
+\begin{lstlisting}[caption = {main.adb}, label = {program_04}]
+with Ada.Text_IO; use Ada.Text_IO; 
+with Week.Child; use Week.Child;
+
+procedure Main is
+begin
+	Put_Line("First day of the week is: " & Get_First_Of_Week);
+end Main;
+\end{lstlisting}
+
+In \verb|main.adb| the line 6 can be changed by\\
+\verb|Put_Line("First day of the week is: " & Week.Child.Get_First_Of_Week);|
+
+\end{document}

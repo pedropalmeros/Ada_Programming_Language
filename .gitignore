@@ -14,3 +14,7 @@
 *.aux
 
 *.log
+
+b~*.adb
+
+b~*.ads
